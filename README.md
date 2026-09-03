@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Portfolio
 
 A personal portfolio site built with Next.js, TypeScript, and Tailwind CSS.
@@ -68,6 +69,6 @@ option, made by the Next.js team:
 
 ## Tech stack
 
-- **Next.js 16** (App Router) — React framework, handles routing and builds
-- **TypeScript** — catches typos/mistakes in your data before they become bugs
-- **Tailwind CSS v4** — utility-based styling, configured via `@theme` in `globals.css`
+=======
+ # Portfolio
+>>>>>>> origin/main
