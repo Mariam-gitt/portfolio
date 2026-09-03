@@ -1,0 +1,44 @@
+/* Pulls in Tailwind's utility classes (things like "flex", "text-lg") so we can use them below */
+@import "tailwindcss";
+
+/* @theme is Tailwind v4's way of defining custom design tokens directly in CSS.
+   Every variable below becomes a usable Tailwind class automatically —
+   e.g. --color-ink below lets us write className="text-ink" anywhere. */
+@theme inline {
+  /* Background: a cool, soft off-white (not pure white, not a warm cream) */
+  --color-paper: #f5f6f3;
+  /* Primary text color: deep graphite with a hint of teal, not pure black */
+  --color-ink: #1b2320;
+  /* Muted text color, used for secondary/supporting text */
+  --color-mist: #6f7a74;
+  /* Primary accent: a muted teal, used sparingly for links/highlights */
+  --color-teal: #2f6f68;
+  /* Secondary accent: a warm amber, used only for tiny details (a dot, a hover) */
+  --color-amber: #c98a3e;
+  /* Slightly darker paper tone, used to tint alternate project rows */
+  --color-thread: #ebeee9;
+  /* Hairline border color, quiet and low-contrast */
+  --color-hairline: #d8dbd5;
+
+  /* Font family tokens, wired up to the Next.js font loader in layout.tsx */
+  --font-display: var(--font-fraunces);
+  --font-body: var(--font-plex-sans);
+  --font-tag: var(--font-plex-mono);
+}
+
+/* Base page styles */
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+}
+
+/* Respect people who've asked their OS to reduce motion —
+   this turns off animations/transitions for them site-wide. */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
