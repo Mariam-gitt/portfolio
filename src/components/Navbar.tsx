@@ -1,98 +1,53 @@
-"use client"; // This component uses useState (interactivity), so it must run in the
-// browser, not just on the server — "use client" opts it into that.
+// Mark the navigation as a client component because it has mobile menu state.
+"use client";
 
-import { useState } from "react"; // React's hook for storing state that changes over time
-import { profile } from "@/data/content";
+// Import the menu and close icons used by the responsive navigation.
+import { Menu, X } from "lucide-react";
+// Import React state for the mobile menu.
+import { useState } from "react";
 
-// The sections the nav links jump to, in the order they appear on the page.
-// Each "id" must exactly match the id={"..."} on that section in page.tsx —
-// this is the exact bug the old portfolio had (ids that didn't match).
-const links = [
-  { id: "about", label: "About" },
-  { id: "experience", label: "Experience" },
-  { id: "projects", label: "Projects" },
-  { id: "contact", label: "Contact" },
-];
-
+// Export the responsive site navigation.
 export default function Navbar() {
-  // "isOpen" holds whether the mobile menu is currently open (true/false).
-  // "setIsOpen" is the only function allowed to change it — calling it
-  // triggers React to re-render this component with the new value.
-  const [isOpen, setIsOpen] = useState(false);
+  // Track whether the mobile navigation drawer is open.
+  const [open, setOpen] = useState(false);
+  // Define the navigation links once so desktop and mobile menus stay consistent.
+  const links = ["about", "experience", "skills", "projects", "contact"];
 
+  // Render the fixed-style top navigation.
   return (
-    <header className="sticky top-0 z-50 border-b border-hairline bg-paper/90 backdrop-blur">
-      <div className="mx-auto flex max-w-3xl items-center justify-between px-6 py-4">
-        {/* Clicking the name scrolls back to the top of the page */}
-        <a href="#top" className="font-display text-lg text-ink">
-          {profile.name}
-        </a>
-
-        {/* Desktop links: hidden on small screens (hidden), shown from the
-            "sm" breakpoint up (sm:flex) — Tailwind's responsive prefix system. */}
-        <nav className="hidden gap-8 sm:flex">
+    // Keep the navigation above the page content with a warm translucent background.
+    <header className="sticky top-0 z-40 border-b border-line/70 bg-sand/90 backdrop-blur-md">
+      {/* Center the navigation content and constrain its width. */}
+      <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4" aria-label="Main navigation">
+        {/* Use the first initial as a compact brand mark. */}
+        <a href="#top" className="font-mono-display text-lg font-bold tracking-tight text-ink">M<span className="text-plum">.</span></a>
+        {/* Render the desktop navigation links. */}
+        <div className="hidden items-center gap-7 md:flex">
           {links.map((link) => (
-            <a
-              key={link.id} // React needs a unique "key" on list items to track each one
-              href={`#${link.id}`}
-              className="text-sm text-mist transition-colors hover:text-ink"
-            >
-              {link.label}
+            // Render one anchor for each section.
+            <a key={link} href={`#${link}`} className="font-mono-display text-xs uppercase tracking-[0.18em] text-muted transition hover:text-plum">
+              {/* Show the human-readable section name. */}
+              {link}
             </a>
           ))}
-        </nav>
-
-        {/* Mobile menu button: only shown below the "sm" breakpoint (sm:hidden).
-            Clicking it flips isOpen between true and false. */}
-        <button
-          type="button"
-          onClick={() => setIsOpen(!isOpen)}
-          className="flex h-9 w-9 flex-col items-center justify-center gap-1.5 sm:hidden"
-          aria-label="Toggle menu" // Read aloud by screen readers, since there's no visible text label
-          aria-expanded={isOpen} // Tells screen readers whether the menu is currently open
-        >
-          {/* Three lines that form the hamburger icon. Each one rotates/fades
-              into an "X" shape when the menu is open, using inline style
-              instead of a separate icon image (so there's nothing to break). */}
-          <span
-            className="h-0.5 w-6 bg-ink transition-transform"
-            style={
-              isOpen
-                ? { transform: "translateY(6px) rotate(45deg)" }
-                : undefined
-            }
-          />
-          <span
-            className="h-0.5 w-6 bg-ink transition-opacity"
-            style={isOpen ? { opacity: 0 } : undefined}
-          />
-          <span
-            className="h-0.5 w-6 bg-ink transition-transform"
-            style={
-              isOpen
-                ? { transform: "translateY(-6px) rotate(-45deg)" }
-                : undefined
-            }
-          />
+        </div>
+        {/* Render the mobile menu button on smaller screens. */}
+        <button type="button" className="rounded-full border border-line p-2 md:hidden" aria-label={open ? "Close navigation" : "Open navigation"} onClick={() => setOpen((value) => !value)}>
+          {/* Swap the icon based on menu state. */}
+          {open ? <X size={20} /> : <Menu size={20} />}
         </button>
-      </div>
-
-      {/* The dropdown mobile menu itself — only rendered in the DOM at all
-          when isOpen is true. This is the piece the old portfolio was
-          missing entirely (its version was commented out). */}
-      {isOpen && (
-        <nav className="flex flex-col gap-1 border-t border-hairline px-6 pb-4 sm:hidden">
+      </nav>
+      {/* Render the mobile navigation only while it is open. */}
+      {open && (
+        <div className="border-t border-line/70 px-6 py-5 md:hidden">
           {links.map((link) => (
-            <a
-              key={link.id}
-              href={`#${link.id}`}
-              onClick={() => setIsOpen(false)} // Close the menu once a link is tapped
-              className="py-2 text-sm text-mist transition-colors hover:text-ink"
-            >
-              {link.label}
+            // Close the menu after the user chooses a section.
+            <a key={link} href={`#${link}`} onClick={() => setOpen(false)} className="block border-b border-line/50 py-3 font-mono-display text-xs uppercase tracking-[0.18em] text-muted">
+              {/* Display the section label. */}
+              {link}
             </a>
           ))}
-        </nav>
+        </div>
       )}
     </header>
   );

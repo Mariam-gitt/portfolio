@@ -1,28 +1,45 @@
-// Each of these is one section of the page, built as its own file in
-// src/components/ — importing them here and listing them below is what
-// actually assembles the full page, in this exact top-to-bottom order.
+// Import the main sections that make up the single-page portfolio.
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Experience from "@/components/Experience";
+import Skills from "@/components/Skills";
 import Projects from "@/components/Projects";
 import Contact from "@/components/Contact";
-import Footer from "@/components/Footer";
 
-// This is the actual homepage — Next.js automatically renders whatever
-// this file exports as the content of "/" (the site's root URL).
+// Export the homepage rendered at the root URL.
 export default function Home() {
+  // Compose the page from top to bottom in semantic section order.
   return (
+    // Wrap the page so all sections share one document tree.
     <>
+      {/* Render the sticky navigation. */}
       <Navbar />
+      {/* Render the main content area. */}
       <main>
+        {/* Render the hero section. */}
         <Hero />
+        {/* Render the about section. */}
         <About />
+        {/* Render the animated experience timeline. */}
         <Experience />
+        {/* Render the converging and floating skill cloud. */}
+        <Skills />
+        {/* Render the paged project carousel. */}
         <Projects />
+        {/* Render the working contact form and social links. */}
         <Contact />
       </main>
-      <Footer />
+      {/* Render a minimal footer. */}
+      <footer className="border-t border-line/70 px-6 py-8">
+        {/* Center the footer content. */}
+        <div className="mx-auto flex max-w-6xl flex-col justify-between gap-3 md:flex-row md:items-center">
+          {/* Show the copyright line. */}
+          <p className="font-mono-display text-[10px] uppercase tracking-[0.16em] text-muted">© 2026 Mariam Ali Akbar</p>
+          {/* Provide a quick back-to-top link. */}
+          <a href="#top" className="font-mono-display text-[10px] uppercase tracking-[0.16em] text-plum hover:underline">back to top ↑</a>
+        </div>
+      </footer>
     </>
   );
 }

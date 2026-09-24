@@ -1,94 +1,163 @@
-// This file holds every piece of text/data shown on the site.
-// To update your name, bio, projects, skills, or links later, edit ONLY this file —
-// you never need to touch the component (.tsx) files to change wording or add a project.
-
-// A TypeScript "type" is just a shape/contract: it tells TypeScript (and your editor)
-// exactly which fields an object must have, so a typo like "titel" instead of "title"
-// gets caught immediately instead of silently breaking the page.
+// Define the shape of one portfolio project.
 export type Project = {
-  name: string; // Project name shown as the heading
-  description: string; // 2-3 sentence summary of what it does and why it's interesting
-  tags: string[]; // Short tech-stack labels, e.g. ["Next.js", "TypeScript"]
-  github: string; // Link to the GitHub repo
-  live?: string; // Optional: link to a live/deployed demo (the "?" means this field can be left out)
+  // Store the project title.
+  name: string;
+  // Store the short project description.
+  description: string;
+  // Store the technologies used by the project.
+  tags: string[];
+  // Store the repository URL.
+  github: string;
+  // Store an optional live URL.
+  live?: string;
+  // Store the path of a screenshot inside /public (for example "/projects/movie-explorer.png").
+  image?: string;
+  // Store the key features shown as a checklist on the project card.
+  features: string[];
+  // Store an optional spotlight box for one standout feature.
+  highlight?: { title: string; text: string };
 };
 
-// "as const" tells TypeScript to treat this data as fixed/read-only values,
-// which gives more precise autocomplete and type-checking than a normal array would.
+// Store the user's core profile information in one editable object.
+export const profile = {
+  // Store the full professional name from the supplied résumé.
+  name: "Mariam Ali Akbar",
+  // Store the main professional title from the supplied résumé.
+  role: "Software Engineer",
+  // Store the secondary role wording from the supplied résumé.
+  secondaryRole: "Full-Stack Developer",
+  // Store the user's location from the supplied résumé.
+  location: "Okara District, Punjab, Pakistan",
+  // Store the user's public email from the supplied résumé.
+  email: "mariamakbar77@gmail.com",
+  // Store the public GitHub profile from the supplied résumé/repository.
+  github: "https://github.com/Mariam-gitt",
+  // Store the public LinkedIn profile already present in the existing repository.
+  linkedin: "https://www.linkedin.com/in/mariam-zaineb-43a693305/",
+  // Store a concise hero statement derived directly from the résumé summary.
+  tagline: "Building practical web, full-stack, and AI-powered applications.",
+  // Store the résumé summary without inventing new experience.
+  summary: "Computer Science graduate with hands-on experience in web development, full-stack applications, AI/RAG systems, API development, HubSpot automation, and CRM data workflows.",
+};
+
+// Store professional experience in timeline order.
 export const experience = [
+  // Store the current software engineering internship exactly as represented in the résumé.
   {
+    year: "2026",
     role: "Software Engineering Intern",
-    org: "Fantech Labs",
-    period: "Current",
-    description:
-      "Working on full-stack MERN development — building and shipping features across the stack.",
+    company: "Fantech Labs",
+    bullets: [
+      "Built and reviewed web development projects including a Movie Explorer application using Next.js and TypeScript and a forms project using React Hook Form, Zod, Prisma, and PostgreSQL.",
+      "Developed an API to create HubSpot workflows through Claude Code when the available HubSpot MCP functionality did not support workflow creation.",
+      "Worked with HubSpot workflows, data enrichment, CRM integrations and orphan company/contact identification .",
+      "Worked with Google Tag Manager (GTM) and Google Analytics and reviewed tags of a live website as part of digital marketing and analytics tasks.",
+    ],
   },
-  // {
-  //   role: "Software Engineering Intern",
-  //   org: "Softech",
-  //   period: "Previous",
-  //   description:
-  //     "HubSpot developer work — moved from certification into hands-on API integration.",
-  // },
+  // Store the PITB internship from the supplied résumé.
   {
+    year: "2026",
     role: "Hybrid Intern",
-    org: "PITB Lahore",
-    period: "2024",
-    description: "Built Express.js APIs, including JWT-based authentication.",
+    company: "Punjab Information Technology Board (PITB), Lahore",
+    bullets: [
+      "Developed backend APIs using Express.js for CRUD operations, routing, file uploads, and JWT-based authentication.",
+      "Tested REST APIs using Postman and integrated relational data using MySQL.",
+    ],
   },
+  // Store the Bytewise frontend internship from the supplied résumé.
   {
+    year: "2024",
     role: "Frontend Intern",
-    org: "Bytewise Limited",
-    period: "2023",
-    description: "Frontend development, early hands-on experience with React.",
+    company: "Bytewise Limited",
+    bullets: [
+      "Developed responsive web interfaces using HTML, Tailwind CSS, and JavaScript.",
+      "Built interactive React.js projects including Movie Explorer, Expense Tracker, Shopping Cart, and To-Do applications.",
+      "Practiced component-based architecture, Git version control, and Vercel deployment.",
+    ],
   },
 ] as const;
 
-// Skills grouped into a few clusters so the page can show them as labelled groups
-// instead of one giant unsorted list.
+// Store the technologies grouped exactly around the résumé's skill categories.
 export const skills = {
-  Languages: ["JavaScript", "TypeScript", "C++"],
-  Frontend: ["React", "Next.js", "Tailwind CSS"],
-  Backend: ["Node.js", "Express", "MongoDB", "JWT Auth"],
-  Tools: ["Git", "GitHub", "Vite"],
+  Languages: ["JavaScript", "TypeScript", "Python", "C++", "SQL"],
+  Frontend: ["React.js", "Next.js", "HTML", "CSS", "Tailwind CSS", "shadcn/ui"],
+  Backend: ["Node.js", "Express.js", "REST APIs", "JWT Authentication"],
+  Databases: ["PostgreSQL", "MongoDB", "MySQL", "Prisma"],
+  AI: ["RAG", "LLM Integration", "TF-IDF", "OCR"],
+  Tools: ["Git", "GitHub", "Docker", "Vercel", "Postman", "HubSpot", "GTM", "Google Analytics"],
 };
 
-// The "Project[]" after the colon tells TypeScript every item in this array
-// must match the Project shape defined above — add a new project by copying
-// one of these objects and filling in your own values.
+// Store the selected portfolio projects using only information present in the résumé.
 export const projects: Project[] = [
+  // Store the Movie Explorer project.
+  {
+    name: "Movie Explorer",
+    description: "A movie discovery application with trending, popular, top-rated, upcoming, and now-playing sections, dynamic movie pages, search, favorites, and recently viewed movies.",
+    tags: ["Next.js", "TypeScript", "TMDB API", "Tailwind CSS", "shadcn/ui"],
+    github: "https://github.com/Mariam-gitt/movieExplorer",
+    image: "/projects/movie-explorer.png.png",
+    features: [
+      "Infinite scrolling through movie lists",
+      "Trending, popular, top-rated, upcoming & now-playing sections",
+      "Dynamic movie detail pages",
+      "Search for any movie",
+      "Favorites list",
+      "Recently viewed movies",
+    ],
+  },
+  // Store the WordKnit project.
   {
     name: "WordKnit",
-    description:
-      "A MERN + Python microservices reading and vocabulary app. Flags genuinely hard words in an uploaded PDF, then explains them with AI-generated profiles and a RAG-based Q&A feature that answers questions grounded in the document itself.",
-    tags: ["React", "Node.js", "MongoDB", "Python", "RAG"],
+    description: "A full-stack vocabulary and reading companion with AI-powered contextual word explanations, speaking and vocabulary coaching, RAG retrieval, document/PDF processing, and OCR features.",
+    tags: ["React", "Node.js", "Express.js", "MongoDB", "Python", "RAG", "LLM APIs"],
     github: "https://github.com/Mariam-gitt/WordKnit",
+    image: "/projects/wordknit.jpg.png",
+    features: [
+      "AI-powered contextual word explanations",
+      "Vocabulary coaching",
+      "RAG retrieval over your own reading material",
+      "Document & PDF processing",
+      "OCR for text in images and scans",
+    ],
+    // TODO: replace this text with the exact details of how the speaking coach works.
+    highlight: {
+      title: "Speaking Coach",
+      text: "An AI speaking coach that helps you practice speaking and build your vocabulary, alongside the reading companion.",
+    },
   },
-  {
-    name: "movieExplorer",
-    description:
-      "A movie discovery app built with Next.js and TypeScript, styled after a dark streaming-service UI. Pulls live data from the TMDB API with genre browsing, favorites, and unit tests.",
-    tags: ["Next.js", "TypeScript", "Tailwind CSS"],
-    github: "https://github.com/Mariam-gitt/movieExplorer",
-  },
-  {
-    name: "ecom",
-    description:
-      "A full-stack ecommerce app — React frontend with a functional cart, backed by a Node/Express API. Includes voice search (LLM-parsed queries) and a simulated payment flow.",
-    tags: ["React", "Node.js", "Express", "MongoDB"],
-    github: "https://github.com/Mariam-gitt/ecom",
-  },
+  // Store the RAG document chatbot project.
+  // {
+  //   name: "RAG-Based Document Chatbot",
+  //   description: "A retrieval-augmented generation document chatbot that answers questions about uploaded documents using document processing, text chunking, embeddings, semantic retrieval, and source display.",
+  //   tags: ["Next.js", "Node.js", "PostgreSQL", "Vector Search", "LLM", "RAG"],
+  //   github: "https://github.com/Mariam-gitt/portfolio",
+  //   image: "/projects/rag-chatbot.png",
+  //   features: [
+  //     "Upload documents and ask questions about them",
+  //     "Text chunking and embeddings",
+  //     "Semantic (vector) retrieval",
+  //     "Answers show the sources they came from",
+  //   ],
+  // },
+  // Store the e-commerce project.
+  // {
+  //   name: "E-Commerce Application",
+  //   description: "A React.js and JavaScript e-commerce application built to strengthen understanding of React components, state management, and React hooks.",
+  //   tags: ["React.js", "JavaScript"],
+  //   github: "https://github.com/Mariam-gitt/ecom",
+  //   image: "/projects/ecommerce.png",
+  //   features: [
+  //     "Component-based React UI",
+  //     "State management",
+  //     "React hooks",
+  //   ],
+  // },
 ];
 
-// The single source of truth for name, role, bio, and contact links.
-// "name" is deliberately just the first name — add a last name here later
-// once you've settled on which one to use professionally.
-export const profile = {
-  name: "Mariam",
-  role: "Software Engineer",
-  tagline: "Full-stack developer building with the MERN stack and Next.js.",
-  bio: "Recent Computer Science graduate, currently a Software Engineering Intern at Fantech Labs, working mainly in full-stack MERN development. I like building real, working things end to end — from database to UI — and picking up new tools along the way.",
-  email: "mariamakbar77@gmail.com",
-  github: "https://github.com/Mariam-gitt",
-  linkedin: "https://www.linkedin.com/in/mariam-zaineb-43a693305/",
+// Store the education information from the supplied résumé.
+export const education = {
+  degree: "BS Computer Science",
+  institution: "University of Okara, Renala Khurd",
+  period: "2022–2026",
+  cgpa: "3.7/4.0",
 };

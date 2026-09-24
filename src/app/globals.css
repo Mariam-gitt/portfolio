@@ -1,44 +1,162 @@
-/* Pulls in Tailwind's utility classes (things like "flex", "text-lg") so we can use them below */
+/* Import Tailwind CSS v4 so utility classes work throughout the application. */
 @import "tailwindcss";
 
-/* @theme is Tailwind v4's way of defining custom design tokens directly in CSS.
-   Every variable below becomes a usable Tailwind class automatically —
-   e.g. --color-ink below lets us write className="text-ink" anywhere. */
+/* Define the portfolio's warm editorial color and typography system. */
 @theme inline {
-  /* Background: a cool, soft off-white (not pure white, not a warm cream) */
-  --color-paper: #f5f6f3;
-  /* Primary text color: deep graphite with a hint of teal, not pure black */
-  --color-ink: #1b2320;
-  /* Muted text color, used for secondary/supporting text */
-  --color-mist: #6f7a74;
-  /* Primary accent: a muted teal, used sparingly for links/highlights */
-  --color-teal: #2f6f68;
-  /* Secondary accent: a warm amber, used only for tiny details (a dot, a hover) */
-  --color-amber: #c98a3e;
-  /* Slightly darker paper tone, used to tint alternate project rows */
-  --color-thread: #ebeee9;
-  /* Hairline border color, quiet and low-contrast */
-  --color-hairline: #d8dbd5;
-
-  /* Font family tokens, wired up to the Next.js font loader in layout.tsx */
-  --font-display: var(--font-fraunces);
-  --font-body: var(--font-plex-sans);
-  --font-tag: var(--font-plex-mono);
+  /* Define the warm sand page background requested by the design brief. */
+  --color-sand: #eadcc7;
+  /* Define the mustard primary color used for major actions and highlights. */
+  --color-mustard: #c99b2e;
+  /* Define the blush secondary color used for cards and soft decorative areas. */
+  --color-blush: #e9b7ad;
+  /* Define the plum accent used only for small visual details. */
+  --color-plum: #5a2d4f;
+  /* Define the dark ink used for readable text. */
+  --color-ink: #2c2520;
+  /* Define a muted ink tone for supporting text. */
+  --color-muted: #6e6258;
+  /* Define the light paper tone used inside elevated cards. */
+  --color-paper: #f7efe4;
+  /* Define the border tone used across cards and separators. */
+  --color-line: #cdbda8;
+  /* Connect the Space Mono variable to a reusable font token. */
+  --font-mono-display: var(--font-space-mono);
+  /* Connect the Inter variable to a reusable font token. */
+  --font-sans-body: var(--font-inter);
 }
 
-/* Base page styles */
+/* Enable smooth anchor navigation for section links. */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Establish the global page background, text color, and body font. */
 body {
-  background: var(--color-paper);
+  margin: 0;
+  background: var(--color-sand);
   color: var(--color-ink);
-  font-family: var(--font-body);
+  font-family: var(--font-sans-body), sans-serif;
 }
 
-/* Respect people who've asked their OS to reduce motion —
-   this turns off animations/transitions for them site-wide. */
+/* Make keyboard focus visible instead of relying on mouse-only interaction. */
+:focus-visible {
+  outline: 3px solid var(--color-plum);
+  outline-offset: 4px;
+}
+
+/* Prevent decorative overflow from creating accidental horizontal scrolling. */
+body {
+  overflow-x: hidden;
+}
+
+/* Create the staggered entrance animation used by hero content. */
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Create the gentle floating motion used by skill icons after convergence. */
+@keyframes skill-float {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(2deg);
+  }
+}
+
+/* Create the initial edge-to-center movement for skill icons. */
+@keyframes skill-converge {
+  from {
+    opacity: 0;
+    transform: translate(var(--start-x), var(--start-y)) scale(0.6) rotate(-18deg);
+  }
+  to {
+    opacity: 1;
+    transform: translate(0, 0) scale(1) rotate(0deg);
+  }
+}
+
+/* Create the tiny pop used by section divider accents. */
+@keyframes accent-pop {
+  from {
+    opacity: 0;
+    transform: scale(0) rotate(-45deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+/* Create the on/off blink used by the typewriter cursor. */
+@keyframes cursor-blink {
+  0%, 49% {
+    opacity: 1;
+  }
+  50%, 100% {
+    opacity: 0;
+  }
+}
+
+/* Define the blinking cursor class. */
+.cursor-blink {
+  animation: cursor-blink 1s step-end infinite;
+}
+
+/* Define the reusable staggered hero entrance class. */
+.hero-enter {
+  animation: hero-rise 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Define the reusable skill entrance class. */
+.skill-enter {
+  animation: skill-converge 900ms cubic-bezier(0.22, 1, 0.36, 1) both, skill-float 4s ease-in-out 900ms infinite;
+}
+
+/* Define the reusable divider accent animation class. */
+.accent-pop {
+  animation: accent-pop 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Hide elements visually while preserving a smooth reveal through JavaScript. */
+.reveal-hidden {
+  opacity: 0;
+  transform: translateY(28px);
+}
+
+/* Reveal elements when their observer marks them visible. */
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 700ms ease, transform 700ms ease;
+}
+
+/* Alternate experience cards with horizontal slide-in directions. */
+.timeline-left.reveal-hidden {
+  transform: translateX(-42px);
+}
+
+/* Alternate experience cards with the opposite horizontal slide-in direction. */
+.timeline-right.reveal-hidden {
+  transform: translateX(42px);
+}
+
+/* Respect users who request reduced motion at operating-system level. */
 @media (prefers-reduced-motion: reduce) {
-  * {
+  /* Disable animations and transitions for accessibility. */
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

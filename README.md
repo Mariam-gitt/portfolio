@@ -1,73 +1,43 @@
-# Portfolio
+# Mariam Ali Akbar — Portfolio
 
-A personal portfolio site built with Next.js, TypeScript, and Tailwind CSS.
+A Next.js 16 + TypeScript + Tailwind CSS portfolio using a warm editorial palette: mustard, blush, plum, and warm sand.
 
-## Running it locally
+## Run locally
 
 ```bash
 npm install
 npm run dev
 ```
 
-Then open http://localhost:3000. The first `npm run dev` needs internet access
-to download the Google Fonts (Fraunces, IBM Plex Sans, IBM Plex Mono) — normal
-and one-time, they get cached after that.
+## Contact form setup
 
-## Editing your info
+1. Create a free account at https://resend.com and copy an API key.
+2. Copy `.env.example` to `.env.local` and fill in `RESEND_API_KEY` and `CONTACT_TO_EMAIL`. Restart `npm run dev` after editing it.
+3. **On Vercel**, add the same variables under Project → Settings → Environment Variables, then redeploy. `.env.local` is not uploaded.
+4. While you use the default sender (`onboarding@resend.dev`), Resend only delivers to the email address you signed up to Resend with, so `CONTACT_TO_EMAIL` must be that address. To email any address, verify your own domain in Resend and set `CONTACT_FROM_EMAIL`.
 
-You should almost never need to touch the component files. Everything you'd
-want to change — your name, bio, email, links, work experience, skills, and
-projects — lives in one place:
+The form posts to `src/app/api/contact/route.ts`. Real errors are logged to the server console (your terminal or Vercel logs); visitors only see a friendly message with a mailto fallback.
 
-```
-src/data/content.ts
-```
+## Project screenshots
 
-Open it, edit the text, save, and the site updates. To add a new project,
-copy one of the existing objects in the `projects` array and fill in your own
-`name`, `description`, `tags`, and `github` link.
+Drop your screenshots into `public/projects/` using the file names listed in `public/projects/README.txt` (for example `movie-explorer.png`). Until a file exists, the card shows a "Screenshot coming soon" placeholder. Features and the WordKnit "Speaking Coach" box are edited in `src/data/content.ts`.
 
-### Adding your last name
+## Skill icons
 
-Right now `profile.name` in `content.ts` is just `"Mariam"`. Once you decide
-which surname to use professionally, just change that one line — it updates
-the hero heading, the browser tab title, and the footer automatically.
+Skill logos come from `react-icons` (Simple Icons for brands, Lucide for concepts like RAG/OCR). To add a skill, add its name to `src/data/content.ts` and map it in the `icons` object at the top of `src/components/Skills.tsx`.
 
-## Project structure
+## Resume
 
-```
-src/
-├── app/
-│   ├── layout.tsx      # Loads fonts, sets the browser tab title
-│   ├── page.tsx         # Assembles the sections into the homepage
-│   └── globals.css      # Color palette and font tokens
-├── components/
-│   ├── Navbar.tsx        # Top nav, including a working mobile menu
-│   ├── Hero.tsx
-│   ├── About.tsx
-│   ├── Experience.tsx
-│   ├── Projects.tsx
-│   ├── Contact.tsx
-│   └── Footer.tsx
-└── data/
-    └── content.ts        # <- edit this file for all text/data changes
-```
+The supplied resume has been converted to `public/Mariam_Akbar_ATS_Resume(1).pdf` so the portfolio can preview and download it directly.
 
-## Deploying (so LinkedIn/GitHub visitors can actually see it)
+## Main files
 
-Next.js sites need a host that can run a small server (unlike the old plain
-HTML site, this can't be dropped onto GitHub Pages as-is). The easiest free
-option, made by the Next.js team:
-
-1. Push this project to a GitHub repo.
-2. Go to https://vercel.com, sign in with your GitHub account.
-3. Click **Add New → Project**, pick this repo, and click **Deploy**.
-4. Vercel gives you a live URL (e.g. `your-portfolio.vercel.app`) — that's
-   what you'd link from LinkedIn/GitHub. Every future push to `main`
-   auto-deploys.
-
-## Tech stack
-
-- **Next.js 16** (App Router) - React framework, handles routing and builds
-- **TypeScript** - catches typos/mistakes in your data before they become bugs
-- **Tailwind CSS v4** (utility-based styling, configured via `@theme` in `globals.css`)
+- `src/data/content.ts` — portfolio content.
+- `src/app/globals.css` — palette, typography, animations, and global styling.
+- `src/components/Hero.tsx` — hero, resume action, and the "Open to work" profile card.
+- `src/components/Typewriter.tsx` — typing effect with blinking cursor.
+- `src/components/Experience.tsx` — alternating animated timeline.
+- `src/components/Skills.tsx` — skill icon convergence/floating animation.
+- `src/components/Projects.tsx` — no-scroll paged carousel.
+- `src/components/Contact.tsx` — contact form UI.
+- `src/app/api/contact/route.ts` — email delivery endpoint.
