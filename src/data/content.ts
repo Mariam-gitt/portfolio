@@ -16,6 +16,8 @@ export type Project = {
   features: string[];
   // Store an optional spotlight box for one standout feature.
   highlight?: { title: string; text: string };
+  // Store a short badge label shown on the card (for example "Internship Project").
+  kind: string;
 };
 
 // Store the user's core profile information in one editable object.
@@ -27,7 +29,7 @@ export const profile = {
   // Store the secondary role wording from the supplied résumé.
   secondaryRole: "Full-Stack Developer",
   // Store the user's location from the supplied résumé.
-  location: "Okara District, Punjab, Pakistan",
+  location: "Renala Khurd, Punjab, Pakistan",
   // Store the user's public email from the supplied résumé.
   email: "mariamakbar77@gmail.com",
   // Store the public GitHub profile from the supplied résumé/repository.
@@ -46,12 +48,12 @@ export const experience = [
   {
     year: "2026",
     role: "Software Engineering Intern",
-    company: "Fantech Labs",
+    company: "[Current Company]",
     bullets: [
       "Built and reviewed web development projects including a Movie Explorer application using Next.js and TypeScript and a forms project using React Hook Form, Zod, Prisma, and PostgreSQL.",
       "Developed an API to create HubSpot workflows through Claude Code when the available HubSpot MCP functionality did not support workflow creation.",
-      "Worked with HubSpot workflows, data enrichment, CRM integrations and orphan company/contact identification .",
-      "Worked with Google Tag Manager (GTM) and Google Analytics and reviewed tags of a live website as part of digital marketing and analytics tasks.",
+      "Worked with HubSpot workflows, data enrichment, CRM integrations, orphan company/contact identification, and Metadata.io forms and metadata.",
+      "Worked with Google Tag Manager (GTM) and Google Analytics and reviewed Metadata.io tags as part of digital marketing and analytics tasks.",
     ],
   },
   // Store the PITB internship from the supplied résumé.
@@ -71,7 +73,7 @@ export const experience = [
     company: "Bytewise Limited",
     bullets: [
       "Developed responsive web interfaces using HTML, Tailwind CSS, and JavaScript.",
-      "Built interactive React.js projects including Expense Tracker, and To-Do applications.",
+      "Built interactive React.js projects including Movie Explorer, Expense Tracker, Shopping Cart, and To-Do applications.",
       "Practiced component-based architecture, Git version control, and Vercel deployment.",
     ],
   },
@@ -83,7 +85,7 @@ export const skills = {
   Frontend: ["React.js", "Next.js", "HTML", "CSS", "Tailwind CSS", "shadcn/ui"],
   Backend: ["Node.js", "Express.js", "REST APIs", "JWT Authentication"],
   Databases: ["PostgreSQL", "MongoDB", "MySQL", "Prisma"],
-  AI: ["RAG", "LLM Integration", "TF-IDF", "OCR"],
+  AI: ["RAG", "LLM Integration", "TF-IDF"],
   Tools: ["Git", "GitHub", "Docker", "Vercel", "Postman", "HubSpot", "GTM", "Google Analytics"],
 };
 
@@ -94,8 +96,9 @@ export const projects: Project[] = [
     name: "Movie Explorer",
     description: "A movie discovery application with trending, popular, top-rated, upcoming, and now-playing sections, dynamic movie pages, search, favorites, and recently viewed movies.",
     tags: ["Next.js", "TypeScript", "TMDB API", "Tailwind CSS", "shadcn/ui"],
+    kind: "Internship Project",
     github: "https://github.com/Mariam-gitt/movieExplorer",
-    image: "/projects/movie-explorer.png.png",
+    image: "/projects/movie-explorer.png",
     features: [
       "Infinite scrolling through movie lists",
       "Trending, popular, top-rated, upcoming & now-playing sections",
@@ -108,16 +111,16 @@ export const projects: Project[] = [
   // Store the WordKnit project.
   {
     name: "WordKnit",
-    description: "A full-stack vocabulary and reading companion with AI-powered contextual word explanations, speaking and vocabulary coaching, RAG retrieval, document/PDF processing, and OCR features.",
+    description: "A full-stack vocabulary and reading companion with AI-powered contextual word explanations, speaking and vocabulary coaching, RAG retrieval, and document/PDF processing.",
     tags: ["React", "Node.js", "Express.js", "MongoDB", "Python", "RAG", "LLM APIs"],
+    kind: "Final Year Project",
     github: "https://github.com/Mariam-gitt/WordKnit",
-    image: "/projects/wordknit.jpg.png",
+    image: "/projects/wordknit.png",
     features: [
       "AI-powered contextual word explanations",
       "Vocabulary coaching",
       "RAG retrieval over your own reading material",
       "Document & PDF processing",
-      "OCR for text in images and scans",
     ],
     // TODO: replace this text with the exact details of how the speaking coach works.
     highlight: {
@@ -126,32 +129,33 @@ export const projects: Project[] = [
     },
   },
   // Store the RAG document chatbot project.
-  // {
-  //   name: "RAG-Based Document Chatbot",
-  //   description: "A retrieval-augmented generation document chatbot that answers questions about uploaded documents using document processing, text chunking, embeddings, semantic retrieval, and source display.",
-  //   tags: ["Next.js", "Node.js", "PostgreSQL", "Vector Search", "LLM", "RAG"],
-  //   github: "https://github.com/Mariam-gitt/portfolio",
-  //   image: "/projects/rag-chatbot.png",
-  //   features: [
-  //     "Upload documents and ask questions about them",
-  //     "Text chunking and embeddings",
-  //     "Semantic (vector) retrieval",
-  //     "Answers show the sources they came from",
-  //   ],
-  // },
+  {
+    name: "RAG-Based Document Chatbot",
+    description: "A chatbot that answers questions about your uploaded documents and shows the sources each answer came from.",
+    tags: ["Next.js", "Node.js", "PostgreSQL", "Vector Search", "LLM", "RAG"],
+    kind: "Project",
+    github: "https://github.com/Mariam-gitt/portfolio",
+    image: "/projects/rag-chatbot.png",
+    features: [
+      "Upload documents and ask questions about them",
+      "Finds the most relevant parts of your documents",
+      "Shows the sources behind every answer",
+    ],
+  },
   // Store the e-commerce project.
-  // {
-  //   name: "E-Commerce Application",
-  //   description: "A React.js and JavaScript e-commerce application built to strengthen understanding of React components, state management, and React hooks.",
-  //   tags: ["React.js", "JavaScript"],
-  //   github: "https://github.com/Mariam-gitt/ecom",
-  //   image: "/projects/ecommerce.png",
-  //   features: [
-  //     "Component-based React UI",
-  //     "State management",
-  //     "React hooks",
-  //   ],
-  // },
+  {
+    name: "E-Commerce Application",
+    description: "A React.js and JavaScript e-commerce application built to strengthen understanding of React components, state management, and React hooks.",
+    tags: ["React.js", "JavaScript"],
+    kind: "Personal Project",
+    github: "https://github.com/Mariam-gitt/ecom",
+    image: "/projects/ecommerce.png",
+    features: [
+      "Component-based React UI",
+      "State management",
+      "React hooks",
+    ],
+  },
 ];
 
 // Store the education information from the supplied résumé.
