@@ -72,9 +72,9 @@ export default function Experience() {
       {/* Add the heading area. */}
       <div className="mb-14">
         {/* Show the section number. */}
-        <p className="font-mono-display text-xs uppercase tracking-[0.2em] text-plum">02 / experience</p>
+        {/* <p className="font-mono-display text-xs uppercase tracking-[0.2em] text-plum">02 / experience</p> */}
         {/* Show the section heading. */}
-        <h2 className="mt-4 font-mono-display text-4xl font-bold tracking-tight md:text-6xl">Things I have built & learned<span className="text-mustard">.</span></h2>
+        <h2 className="mt-4 font-mono-display text-4xl font-bold tracking-tight md:text-6xl">Experience className="text-mustard">.</span></h2>
       </div>
       {/* Draw the vertical timeline behind the cards. */}
       <div className="relative space-y-12 before:absolute before:bottom-0 before:left-[7px] before:top-0 before:w-px before:bg-line md:before:left-1/2">
