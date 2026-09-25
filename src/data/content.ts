@@ -44,7 +44,6 @@ export const profile = {
 
 // Store professional experience in timeline order.
 export const experience = [
-  // Store the current software engineering internship exactly as represented in the résumé.
   {
     year: "2026",
     role: "Software Engineering Intern",
@@ -56,7 +55,6 @@ export const experience = [
       "Worked with Google Tag Manager (GTM) and Google Analytics and reviewed Metadata.io tags as part of digital marketing and analytics tasks.",
     ],
   },
-  // Store the PITB internship from the supplied résumé.
   {
     year: "2026",
     role: "Hybrid Intern",
@@ -66,7 +64,6 @@ export const experience = [
       "Tested REST APIs using Postman and integrated relational data using MySQL.",
     ],
   },
-  // Store the Bytewise frontend internship from the supplied résumé.
   {
     year: "2024",
     role: "Frontend Intern",
@@ -91,14 +88,14 @@ export const skills = {
 
 // Store the selected portfolio projects using only information present in the résumé.
 export const projects: Project[] = [
-  // Store the Movie Explorer project.
   {
     name: "Movie Explorer",
     description: "A movie discovery application with trending, popular, top-rated, upcoming, and now-playing sections, dynamic movie pages, search, favorites, and recently viewed movies.",
     tags: ["Next.js", "TypeScript", "TMDB API", "Tailwind CSS", "shadcn/ui"],
     kind: "Internship Project",
+    // The file in /public/projects includes the .png extension twice.
+    image: "/projects/movie-explorer.png.png",
     github: "https://github.com/Mariam-gitt/movieExplorer",
-    image: "/projects/movie-explorer.png",
     features: [
       "Infinite scrolling through movie lists",
       "Trending, popular, top-rated, upcoming & now-playing sections",
@@ -108,48 +105,43 @@ export const projects: Project[] = [
       "Recently viewed movies",
     ],
   },
-  // Store the WordKnit project.
   {
     name: "WordKnit",
     description: "A full-stack vocabulary and reading companion with AI-powered contextual word explanations, speaking and vocabulary coaching, RAG retrieval, and document/PDF processing.",
     tags: ["React", "Node.js", "Express.js", "MongoDB", "Python", "RAG", "LLM APIs"],
     kind: "Final Year Project",
+    // The file in /public/projects is named wordknit.jpg.png.
+    image: "/projects/wordknit.jpg.png",
     github: "https://github.com/Mariam-gitt/WordKnit",
-    image: "/projects/wordknit.png",
     features: [
       "AI-powered contextual word explanations",
       "Vocabulary coaching",
       "RAG retrieval over your own reading material",
       "Document & PDF processing",
     ],
-    // TODO: replace this text with the exact details of how the speaking coach works.
     highlight: {
       title: "Speaking Coach",
       text: "An AI speaking coach that helps you practice speaking and build your vocabulary, alongside the reading companion.",
     },
   },
-  // Store the RAG document chatbot project.
   {
     name: "RAG-Based Document Chatbot",
     description: "A chatbot that answers questions about your uploaded documents and shows the sources each answer came from.",
     tags: ["Next.js", "Node.js", "PostgreSQL", "Vector Search", "LLM", "RAG"],
     kind: "Project",
     github: "https://github.com/Mariam-gitt/portfolio",
-    image: "/projects/rag-chatbot.png",
     features: [
       "Upload documents and ask questions about them",
       "Finds the most relevant parts of your documents",
       "Shows the sources behind every answer",
     ],
   },
-  // Store the e-commerce project.
   {
     name: "E-Commerce Application",
     description: "A React.js and JavaScript e-commerce application built to strengthen understanding of React components, state management, and React hooks.",
     tags: ["React.js", "JavaScript"],
     kind: "Personal Project",
     github: "https://github.com/Mariam-gitt/ecom",
-    image: "/projects/ecommerce.png",
     features: [
       "Component-based React UI",
       "State management",
