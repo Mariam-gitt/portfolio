@@ -20,15 +20,15 @@ export default function ResumeModal() {
         Resume
       </a>
       {/* Offer a direct download as a secondary, icon-only action. */}
-      {/* <a
+      /* {/* <a
         href="/Mariam_Akbar_Resume.pdf"
         download
         aria-label="Download résumé"
         className="inline-flex items-center justify-center rounded-full border-2 border-ink bg-paper p-3 shadow-[5px_5px_0_var(--color-ink)] transition hover:-translate-y-1 hover:shadow-[7px_7px_0_var(--color-ink)]"
       >
-        {/* Show the download icon. */}
-        <Download size={16} aria-hidden="true" />
-      </a> */}
+      //   {/* Show the download icon. */}
+      //   <Download size={16} aria-hidden="true" />
+      // </a> */} */
     </div>
   );
 }
