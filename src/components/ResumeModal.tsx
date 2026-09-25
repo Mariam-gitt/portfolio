@@ -34,14 +34,14 @@ export default function ResumeModal() {
               {/* Group the download, open, and close controls. */}
               <div className="flex items-center gap-2">
                 {/* Provide a direct PDF download. */}
-                <a href="/Mariam_Akbar_ATS_Resume(1).pdf" download className="inline-flex items-center gap-2 rounded-full border border-line px-3 py-2 text-xs font-semibold hover:border-plum hover:text-plum">
+                <a href="/Mariam_Akbar_Resume.pdf" download className="inline-flex items-center gap-2 rounded-full border border-line px-3 py-2 text-xs font-semibold hover:border-plum hover:text-plum">
                   {/* Show the download icon. */}
                   <Download size={15} />
                   {/* Label the download action. */}
                   Download
                 </a>
                 {/* Provide a full-page PDF viewing option. */}
-                <a href="/Mariam_Akbar_ATS_Resume(1).pdf" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-line px-3 py-2 text-xs font-semibold hover:border-plum hover:text-plum">
+                <a href="/Mariam_Akbar_Resume.pdf" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-line px-3 py-2 text-xs font-semibold hover:border-plum hover:text-plum">
                   {/* Show the external-link icon. */}
                   <ExternalLink size={15} />
                   {/* Label the external preview action. */}
@@ -55,7 +55,7 @@ export default function ResumeModal() {
               </div>
             </div>
             {/* Embed the generated PDF so the user can preview it without leaving the page. */}
-            <iframe src="/Mariam_Akbar_ATS_Resume(1).pdf" title="Mariam Ali Akbar résumé" className="min-h-0 flex-1 w-full" />
+            <iframe src="/Mariam_Akbar_Resume.pdf" title="Mariam Ali Akbar résumé" className="min-h-0 flex-1 w-full" />
           </div>
         </div>
       )}
