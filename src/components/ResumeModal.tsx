@@ -19,7 +19,7 @@ export default function ResumeModal() {
         {/* Label the résumé action. */}
         Resume
       </a>
-      /* {/* Offer a direct download as a secondary, icon-only action. */} */
+    
       
     </div>
   );
