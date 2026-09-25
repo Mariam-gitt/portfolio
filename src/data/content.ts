@@ -124,30 +124,30 @@ export const projects: Project[] = [
       text: "An AI speaking coach that helps you practice speaking and build your vocabulary, alongside the reading companion.",
     },
   },
-  {
-    name: "RAG-Based Document Chatbot",
-    description: "A chatbot that answers questions about your uploaded documents and shows the sources each answer came from.",
-    tags: ["Next.js", "Node.js", "PostgreSQL", "Vector Search", "LLM", "RAG"],
-    kind: "Project",
-    github: "https://github.com/Mariam-gitt/portfolio",
-    features: [
-      "Upload documents and ask questions about them",
-      "Finds the most relevant parts of your documents",
-      "Shows the sources behind every answer",
-    ],
-  },
-  {
-    name: "E-Commerce Application",
-    description: "A React.js and JavaScript e-commerce application built to strengthen understanding of React components, state management, and React hooks.",
-    tags: ["React.js", "JavaScript"],
-    kind: "Personal Project",
-    github: "https://github.com/Mariam-gitt/ecom",
-    features: [
-      "Component-based React UI",
-      "State management",
-      "React hooks",
-    ],
-  },
+  // {
+  //   name: "RAG-Based Document Chatbot",
+  //   description: "A chatbot that answers questions about your uploaded documents and shows the sources each answer came from.",
+  //   tags: ["Next.js", "Node.js", "PostgreSQL", "Vector Search", "LLM", "RAG"],
+  //   kind: "Project",
+  //   github: "https://github.com/Mariam-gitt/portfolio",
+  //   features: [
+  //     "Upload documents and ask questions about them",
+  //     "Finds the most relevant parts of your documents",
+  //     "Shows the sources behind every answer",
+  //   ],
+  // },
+  // {
+  //   name: "E-Commerce Application",
+  //   description: "A React.js and JavaScript e-commerce application built to strengthen understanding of React components, state management, and React hooks.",
+  //   tags: ["React.js", "JavaScript"],
+  //   kind: "Personal Project",
+  //   github: "https://github.com/Mariam-gitt/ecom",
+  //   features: [
+  //     "Component-based React UI",
+  //     "State management",
+  //     "React hooks",
+  //   ],
+  // },
 ];
 
 // Store the education information from the supplied résumé.
