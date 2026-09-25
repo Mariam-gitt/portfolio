@@ -20,7 +20,7 @@ export default function ResumeModal() {
         Resume
       </a>
       {/* Offer a direct download as a secondary, icon-only action. */}
-      <a
+      {/* <a
         href="/Mariam_Akbar_Resume.pdf"
         download
         aria-label="Download résumé"
@@ -28,7 +28,7 @@ export default function ResumeModal() {
       >
         {/* Show the download icon. */}
         <Download size={16} aria-hidden="true" />
-      </a>
+      </a> */}
     </div>
   );
 }
