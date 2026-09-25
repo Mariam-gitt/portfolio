@@ -71,7 +71,7 @@ export const experience = [
     company: "Bytewise Limited",
     bullets: [
       "Developed responsive web interfaces using HTML, Tailwind CSS, and JavaScript.",
-      "Built interactive React.js projects including Movie Explorer, Expense Tracker, Shopping Cart, and To-Do applications.",
+      "Built interactive React.js projects including Expense Tracker, and To-Do applications.",
       "Practiced component-based architecture, Git version control, and Vercel deployment.",
     ],
   },
