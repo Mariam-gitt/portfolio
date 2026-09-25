@@ -20,7 +20,7 @@ export default function Navbar() {
       {/* Center the navigation content and constrain its width. */}
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4" aria-label="Main navigation">
         {/* Use the first initial as a compact brand mark. */}
-        <a href="#top" className="font-mono-display text-lg font-bold tracking-tight text-ink">M<span className="text-plum">.</span></a>
+        <a href="#top" className="font-mono-display text-lg font-bold tracking-tight text-ink">Mariam Salman<span className="text-plum">.</span></a>
         {/* Render the desktop navigation links. */}
         <div className="hidden items-center gap-7 md:flex">
           {links.map((link) => (
