@@ -92,27 +92,27 @@ export default function Contact() {
           {/* Render social/contact shortcuts. */}
           <div className="mt-8 flex flex-wrap gap-3">
             {/* Link to GitHub. */}
-            <a href={profile.github} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-line bg-paper px-4 py-3 text-sm hover:border-plum hover:text-plum"><Github size={17} /> GitHub</a>
+            <a href={profile.github} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-line bg-paper px-4 py-3 text-sm hover:border-plum hover:text-plum"><Github size={16} /> GitHub</a>
             {/* Link to LinkedIn. */}
-            <a href={profile.linkedin} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-line bg-paper px-4 py-3 text-sm hover:border-plum hover:text-plum"><Linkedin size={17} /> LinkedIn</a>
+            <a href={profile.linkedin} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-line bg-paper px-4 py-3 text-sm hover:border-plum hover:text-plum"><Linkedin size={16} /> LinkedIn</a>
             {/* Open an email client. */}
-            <a href={`mailto:${profile.email}`} className="inline-flex items-center gap-2 rounded-full border border-line bg-paper px-4 py-3 text-sm hover:border-plum hover:text-plum"><Mail size={17} /> Email</a>
+            <a href={`mailto:${profile.email}`} className="inline-flex items-center gap-2 rounded-full border border-line bg-paper px-4 py-3 text-sm hover:border-plum hover:text-plum"><Mail size={16} /> Email</a>
           </div>
         </div>
         {/* Render the actual contact form. */}
         <form onSubmit={handleSubmit} className="relative overflow-hidden rounded-[2rem] border-2 border-ink bg-paper p-6 shadow-[8px_8px_0_var(--color-blush)] md:p-8">
           {/* Render the name field. */}
-          <label className="block font-mono-display text-xs uppercase tracking-wider">Name<input required name="name" autoComplete="name" maxLength={100} value={form.name} onChange={(event) => updateField("name", event.target.value)} className="mt-2 w-full rounded-2xl border-2 border-line bg-sand px-4 py-3 font-sans-body text-base outline-none focus:border-plum" placeholder="Your name" /></label>
+          <label className="block font-mono-display text-xs uppercase tracking-wider">Name<input required name="name" autoComplete="name" maxLength={100} value={form.name} onChange={(event) => updateField("name", event.target.value)} className="mt-2 w-full rounded-md border border-line bg-white/0 px-3 py-3 text-sm outline-none focus:border-plum" /></label>
           {/* Render the email field. */}
-          <label className="mt-5 block font-mono-display text-xs uppercase tracking-wider">Email<input required name="email" type="email" autoComplete="email" maxLength={200} value={form.email} onChange={(event) => updateField("email", event.target.value)} className="mt-2 w-full rounded-2xl border-2 border-line bg-sand px-4 py-3 font-sans-body text-base outline-none focus:border-plum" placeholder="you@example.com" /></label>
-          {/* Render the message field. */}
-          <label className="mt-5 block font-mono-display text-xs uppercase tracking-wider">Message<textarea required name="message" maxLength={5000} rows={6} value={form.message} onChange={(event) => updateField("message", event.target.value)} className="mt-2 w-full resize-none rounded-2xl border-2 border-line bg-sand px-4 py-3 font-sans-body text-base outline-none focus:border-plum" placeholder="Tell me a little about what you are building..." /></label>
+          <label className="mt-5 block font-mono-display text-xs uppercase tracking-wider">Email<input required name="email" type="email" autoComplete="email" maxLength={200} value={form.email} onChange={(event) => updateField("email", event.target.value)} className="mt-2 w-full rounded-md border border-line bg-white/0 px-3 py-3 text-sm outline-none focus:border-plum" /></label>
+          {/* Render the message field (reduced size). */}
+          <label className="mt-5 block font-mono-display text-xs uppercase tracking-wider">Message<textarea required name="message" maxLength={5000} rows={4} value={form.message} onChange={(event) => updateField("message", event.target.value)} className="mt-2 w-full rounded-md border border-line bg-white/0 px-3 py-3 text-sm outline-none focus:border-plum" /></label>
           {/* Hidden spam trap: real people never see or fill this, bots usually do. */}
           <div className="absolute -left-[9999px] h-0 w-0 overflow-hidden" aria-hidden="true">
             <label>Website<input name="website" type="text" tabIndex={-1} autoComplete="off" defaultValue="" /></label>
           </div>
           {/* Render the submit button. */}
-          <button type="submit" disabled={status === "sending"} className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full border-2 border-ink bg-mustard px-5 py-3 font-mono-display text-xs font-bold uppercase tracking-wider transition hover:-translate-y-1 disabled:cursor-wait disabled:opacity-60">
+          <button type="submit" disabled={status === "sending"} className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full border-2 border-ink bg-mustard px-5 py-3 font-mono-display text-sm font-bold uppercase tracking-wider hover:bg-mustard/90">
             {/* Show the send icon. */}
             <Send size={16} />
             {/* Change the label while the request is in progress. */}
