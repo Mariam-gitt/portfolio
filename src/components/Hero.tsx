@@ -17,8 +17,6 @@ export default function Hero() {
     <section id="top" className="relative overflow-hidden">
       {/* Add a large decorative blush circle behind the content. */}
       <div className="pointer-events-none absolute -right-32 -top-24 h-72 w-72 rounded-full bg-blush/70 blur-[2px]" />
-      {/* Add a tiny plum accent block to echo the concept's editorial details. */}
-      <div className="pointer-events-none absolute right-8 top-36 h-3 w-3 rotate-45 bg-plum" />
       {/* Constrain and vertically center the hero content. */}
       <div className="mx-auto grid min-h-[calc(100vh-73px)] max-w-6xl items-center gap-12 px-6 py-20 lg:grid-cols-[1.4fr_0.6fr]">
         {/* Keep the main hero copy on the left. */}
