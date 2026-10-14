@@ -34,6 +34,16 @@ export default function About() {
             <p className="mt-2 text-muted">{education.institution} · {education.period}</p>
             {/* Display the CGPA exactly as supplied. */}
             <p className="mt-5 font-mono-display text-sm">CGPA {education.cgpa}</p>
+
+            {education.college && (
+              <div className="mt-6 border-t-2 border-dashed border-line pt-5">
+                <p className="font-mono-display text-[10px] uppercase tracking-[0.2em] text-plum">college</p>
+                <p className="mt-3 text-lg font-semibold">{education.college.name}</p>
+                <p className="mt-1 text-sm text-muted">Marks: {education.college.marks}</p>
+                <p className="mt-3 text-sm text-muted">{education.college.campus}</p>
+                <p className="mt-1 text-sm text-muted">Campus marks: {education.college.campusMarks}</p>
+              </div>
+            )}
           </div>
         </div>
       </div>
