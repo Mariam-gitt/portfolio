@@ -30,12 +30,12 @@ function YearLabel({ year }: { year: string }) {
   return <span className="hidden md:block font-mono-display text-sm font-bold text-plum">{year}</span>;
 }
 
-// Small component that shows the company image, and falls back to the year if the image file is missing.
+// Small component that shows the company image, stretched to fill the whole height of the card next to it.
 function SideImage({ item }: { item: ExperienceItem }) {
   // Remember whether the image failed to load (false at first).
   const [failed, setFailed] = useState(false);
-  // If there is no image path, or the file could not be loaded, just show the year instead of a broken-image icon.
-  if (!item.image || failed) return <YearLabel year={item.year} />;
+  // If there is no image path, or the file could not be loaded, show nothing (so the year is not repeated on both sides).
+  if (!item.image || failed) return null;
   // Build the <img> element once so we can wrap it in a link below if needed.
   const picture = (
     <img
@@ -43,27 +43,35 @@ function SideImage({ item }: { item: ExperienceItem }) {
       src={item.image}
       // "alt" = text read by screen readers and shown if the image breaks (accessibility).
       alt={`${item.company} photo`}
-      // If the browser cannot load the file, flip "failed" to true so the fallback year is shown.
+      // If the browser cannot load the file, flip "failed" to true so the image disappears cleanly.
       onError={() => setFailed(true)}
-      // Styling: hidden on phones, max 220px wide, rounded corners, crop-to-fit, and a border to match the cards.
-      className="hidden md:block max-w-[220px] rounded-xl border-2 border-ink object-cover"
+      // Fill the whole box (h-full w-full) and crop instead of stretching (object-cover keeps the photo's proportions).
+      className="h-full w-full object-cover"
     />
   );
-  // If this company has a link, make the picture clickable; otherwise show the picture alone.
-  return item.link ? (
-    <a
-      // Where the link goes.
-      href={item.link}
-      // Open in a new tab so visitors don't leave your portfolio.
-      target="_blank"
-      // Security: stops the new tab from controlling your page (noopener) or seeing where it came from (noreferrer).
-      rel="noopener noreferrer"
-    >
-      {/* The picture inside the link. */}
-      {picture}
-    </a>
-  ) : (
-    picture
+  // Render a box that sits on top of its parent cell (absolute inset-0 = stick to all four edges), so the image copies the card's height.
+  return (
+    <div className="absolute inset-0 overflow-hidden rounded-2xl border-2 border-ink shadow-[6px_6px_0_var(--color-blush)]">
+      {/* If this company has a link, make the picture clickable; otherwise show the picture alone. */}
+      {item.link ? (
+        <a
+          // Where the link goes.
+          href={item.link}
+          // Open in a new tab so visitors don't leave your portfolio.
+          target="_blank"
+          // Security: stops the new tab from controlling your page (noopener) or seeing where it came from (noreferrer).
+          rel="noopener noreferrer"
+          // Make the link fill the whole box so the entire image is clickable.
+          className="block h-full w-full"
+        >
+          {/* The picture inside the link. */}
+          {picture}
+        </a>
+      ) : (
+        // No link: show the picture alone.
+        picture
+      )}
+    </div>
   );
 }
 
@@ -97,12 +105,12 @@ function TimelineCard({ item, index }: { item: ExperienceItem; index: number }) 
       // Attach the ref so the observer can watch this element.
       ref={ref}
       // Layout classes plus the reveal animation classes.
-      className={`relative grid gap-5 md:grid-cols-3 items-center ${index % 2 === 0 ? "timeline-left" : "timeline-right"} ${
+      className={`relative grid gap-5 md:grid-cols-3 items-stretch ${index % 2 === 0 ? "timeline-left" : "timeline-right"} ${
         visible ? "reveal-visible" : "reveal-hidden"
       }`}
     >
       {/* Left column: year when the image is on the right, image when the image is on the left. */}
-      <div className="flex items-start md:justify-end md:order-1">
+      <div className="relative hidden items-center md:order-1 md:flex md:justify-end">
         {/* Pick what to show in the left column. */}
         {imageOnRight ? <YearLabel year={item.year} /> : <SideImage item={item} />}
       </div>
@@ -149,18 +157,11 @@ function TimelineCard({ item, index }: { item: ExperienceItem; index: number }) 
       </article>
 
       {/* Right column: image when the image is on the right, year otherwise. */}
-      <div className="flex items-start md:justify-start md:order-3">
+      <div className="relative hidden items-center md:order-3 md:flex md:justify-start">
         {/* Pick what to show in the right column. */}
         {imageOnRight ? <SideImage item={item} /> : <YearLabel year={item.year} />}
       </div>
 
-      {/* Draw the central timeline node (the dot on the vertical line) on larger screens. */}
-      <span
-        // Position the dot in the exact center of the row.
-        className="absolute left-1/2 top-1/2 hidden h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-ink bg-mustard md:block"
-        // Hide the decorative dot from screen readers.
-        aria-hidden="true"
-      />
     </div>
   );
 }
