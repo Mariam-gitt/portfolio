@@ -10,7 +10,7 @@ import SectionDivider from "./SectionDivider";
 
 // Describe the shape of one experience item (TypeScript "type" = a description of what data looks like).
 type ExperienceItem = {
-  // The year shown on the timeline.
+  // The year shown as a small badge on the card.
   year: string;
   // The job title.
   role: string;
@@ -24,18 +24,13 @@ type ExperienceItem = {
   image?: string;
 };
 
-// Small component that shows the year text (used when there is no image, or on the opposite side of the image).
-function YearLabel({ year }: { year: string }) {
-  // Render the year; "hidden md:block" = invisible on phones, visible on medium screens and up.
-  return <span className="hidden md:block font-mono-display text-sm font-bold text-plum">{year}</span>;
-}
-
-// Small component that shows the company image, stretched to fill the whole height of the card next to it.
+// Small component that shows a landscape (horizontal) company image; it keeps the same width even when there is no image.
+// DATA FLOW: PARENT -> CHILD. TimelineCard (parent) passes `item` down into SideImage (child) as a prop. Nothing is sent back up.
 function SideImage({ item }: { item: ExperienceItem }) {
-  // Remember whether the image failed to load (false at first).
+  // Remember whether the image failed to load (false at first). This is the component's own private state, not shared with any parent.
   const [failed, setFailed] = useState(false);
-  // If there is no image path, or the file could not be loaded, show nothing (so the year is not repeated on both sides).
-  if (!item.image || failed) return null;
+  // If there is no image (or it failed), render an invisible spacer of the same width so every card stays the same size.
+  if (!item.image || failed) return <div className="hidden w-[280px] shrink-0 md:block" aria-hidden="true" />;
   // Build the <img> element once so we can wrap it in a link below if needed.
   const picture = (
     <img
@@ -43,15 +38,15 @@ function SideImage({ item }: { item: ExperienceItem }) {
       src={item.image}
       // "alt" = text read by screen readers and shown if the image breaks (accessibility).
       alt={`${item.company} photo`}
-      // If the browser cannot load the file, flip "failed" to true so the image disappears cleanly.
+      // If the browser cannot load the file, flip "failed" to true so the image is replaced by the spacer.
       onError={() => setFailed(true)}
-      // Fill the whole box (h-full w-full) and crop instead of stretching (object-cover keeps the photo's proportions).
+      // Fill the landscape box and crop instead of squashing (object-cover keeps the photo's proportions).
       className="h-full w-full object-cover"
     />
   );
-  // Render a box that sits on top of its parent cell (absolute inset-0 = stick to all four edges), so the image copies the card's height.
+  // Render the landscape box: fixed 280px wide, 3:2 shape (aspect-[3/2] = width : height ratio), rounded, bordered, hidden on phones.
   return (
-    <div className="absolute inset-0 overflow-hidden rounded-2xl border-2 border-ink shadow-[6px_6px_0_var(--color-blush)]">
+    <div className="hidden aspect-[3/2] w-[280px] shrink-0 overflow-hidden rounded-2xl border-2 border-ink shadow-[6px_6px_0_var(--color-blush)] md:block">
       {/* If this company has a link, make the picture clickable; otherwise show the picture alone. */}
       {item.link ? (
         <a
@@ -76,6 +71,7 @@ function SideImage({ item }: { item: ExperienceItem }) {
 }
 
 // Define a small component that reveals itself when visible.
+// DATA FLOW: PARENT -> CHILD. Experience (parent) passes `item` and `index` down to this component (child) as props. Nothing is sent back up.
 function TimelineCard({ item, index }: { item: ExperienceItem; index: number }) {
   // Create a DOM reference for the observer (a "ref" points at the real HTML element).
   const ref = useRef<HTMLDivElement | null>(null);
@@ -96,59 +92,58 @@ function TimelineCard({ item, index }: { item: ExperienceItem; index: number }) 
     return () => observer.disconnect();
   }, []);
 
-  // Decide which side gets the image: even items = image on the right, odd items = image on the left (always opposite the year).
-  const imageOnRight = index % 2 === 0;
-
-  // Render one alternating timeline item.
+  // Render one row: card + image side by side on desktop, card only on phones.
   return (
     <div
       // Attach the ref so the observer can watch this element.
       ref={ref}
-      // Layout classes plus the reveal animation classes.
-      className={`relative grid gap-5 md:grid-cols-3 items-stretch ${index % 2 === 0 ? "timeline-left" : "timeline-right"} ${
+      // Flex row (items side by side). Even rows: card left, image right. Odd rows: "flex-row-reverse" flips it so the image is on the left.
+      className={`md:flex md:items-center md:gap-8 ${index % 2 === 0 ? "md:flex-row timeline-left" : "md:flex-row-reverse timeline-right"} ${
         visible ? "reveal-visible" : "reveal-hidden"
       }`}
     >
-      {/* Left column: year when the image is on the right, image when the image is on the left. */}
-      <div className="relative hidden items-center md:order-1 md:flex md:justify-end">
-        {/* Pick what to show in the left column. */}
-        {imageOnRight ? <YearLabel year={item.year} /> : <SideImage item={item} />}
-      </div>
-
-      {/* Middle column: the card content. */}
-      <article className="md:order-2 rounded-3xl border-2 border-ink bg-paper p-6 shadow-[6px_6px_0_var(--color-blush)]">
-        {/* Show the role. */}
-        <h3 className="font-mono-display text-xl font-bold">{item.role}</h3>
-        {/* Show the company name; make it a clickable link when a link exists. */}
-        <p className="mt-1 text-sm font-semibold text-plum">
-          {/* Ternary = short if/else: link exists ? show <a> : show plain text. */}
-          {item.link ? (
-            <a
-              // Where the link goes.
-              href={item.link}
-              // Open in a new tab.
-              target="_blank"
-              // Security attributes for new-tab links.
-              rel="noopener noreferrer"
-              // Underline in mustard so visitors can tell it is clickable.
-              className="underline decoration-mustard decoration-2 underline-offset-4 hover:text-ink"
-            >
-              {/* Company name plus a small arrow to hint it opens elsewhere. */}
-              {item.company} ↗
-            </a>
-          ) : (
-            // No link: show the company name as plain text.
-            item.company
-          )}
-        </p>
-        {/* Render the résumé bullet points. */}
-        <ul className="mt-5 space-y-3 text-sm leading-7 text-muted">
+      {/* The card: "flex-1" = take all the space the image does not use, so the card is wide and therefore short. */}
+      <article className="flex-1 rounded-3xl border-2 border-ink bg-paper p-5 shadow-[6px_6px_0_var(--color-blush)]">
+        {/* Header row: role + company on the left, year badge on the right. */}
+        <div className="flex items-start justify-between gap-4">
+          {/* Left side of the header. */}
+          <div>
+            {/* Show the role. */}
+            <h3 className="font-mono-display text-lg font-bold">{item.role}</h3>
+            {/* Show the company name; make it a clickable link when a link exists. */}
+            <p className="mt-0.5 text-sm font-semibold text-plum">
+              {/* Ternary = short if/else: link exists ? show <a> : show plain text. */}
+              {item.link ? (
+                <a
+                  // Where the link goes.
+                  href={item.link}
+                  // Open in a new tab.
+                  target="_blank"
+                  // Security attributes for new-tab links.
+                  rel="noopener noreferrer"
+                  // Underline in mustard so visitors can tell it is clickable.
+                  className="underline decoration-mustard decoration-2 underline-offset-4 hover:text-ink"
+                >
+                  {/* Company name plus a small arrow to hint it opens elsewhere. */}
+                  {item.company} ↗
+                </a>
+              ) : (
+                // No link: show the company name as plain text.
+                item.company
+              )}
+            </p>
+          </div>
+          {/* Year badge (shown once per card, so no more duplicate years on both sides). */}
+          <span className="shrink-0 font-mono-display text-sm font-bold text-plum">{item.year}</span>
+        </div>
+        {/* Render the résumé bullet points in smaller, tighter text so the card stays short. */}
+        <ul className="mt-3 space-y-1.5 text-[13px] leading-6 text-muted">
           {/* Loop over each bullet string with .map (turns every item of a list into an element). */}
           {item.bullets.map((bullet) => (
             // Each list item needs a unique "key" so React can track it.
             <li key={bullet} className="flex gap-3">
               {/* Use a mustard square as the custom bullet. */}
-              <span className="mt-2 h-2 w-2 shrink-0 bg-mustard" />
+              <span className="mt-2 h-1.5 w-1.5 shrink-0 bg-mustard" />
               {/* Render the bullet text. */}
               <span>{bullet}</span>
             </li>
@@ -156,33 +151,29 @@ function TimelineCard({ item, index }: { item: ExperienceItem; index: number }) 
         </ul>
       </article>
 
-      {/* Right column: image when the image is on the right, year otherwise. */}
-      <div className="relative hidden items-center md:order-3 md:flex md:justify-start">
-        {/* Pick what to show in the right column. */}
-        {imageOnRight ? <SideImage item={item} /> : <YearLabel year={item.year} />}
-      </div>
-
+      {/* The landscape image (or an invisible spacer) on the opposite side of the card. */}
+      <SideImage item={item} />
     </div>
   );
 }
 
 // Export the full experience timeline so page.tsx can use it.
 export default function Experience() {
-  // Render the timeline section.
+  // Render the timeline section (smaller top/bottom padding than before so everything fits on one screen).
   return (
-    <section id="experience" className="mx-auto max-w-6xl px-6 py-24">
+    <section id="experience" className="mx-auto max-w-6xl px-6 py-12">
       {/* Add the section divider. */}
       <SectionDivider label="experience" />
-      {/* Add the heading area. */}
-      <div className="mb-14">
-        {/* Show the section heading. */}
-        <h2 className="mt-4 font-mono-display text-4xl font-bold tracking-tight md:text-6xl">Experience<span className="text-mustard">.</span></h2>
+      {/* Add the heading area with a smaller bottom gap. */}
+      <div className="mb-6">
+        {/* Show the section heading (smaller than before). */}
+        <h2 className="mt-3 font-mono-display text-3xl font-bold tracking-tight md:text-5xl">Experience<span className="text-mustard">.</span></h2>
       </div>
-      {/* Draw the vertical timeline behind the cards. */}
-      <div className="relative space-y-12 before:absolute before:bottom-0 before:left-[7px] before:top-0 before:w-px before:bg-line md:before:left-1/2">
+      {/* Stack the rows with a small gap between them (space-y-5 = 1.25rem). */}
+      <div className="space-y-5">
         {/* Loop over every job in the data file. */}
         {experience.map((item: ExperienceItem, index) => (
-          // Render one animated experience card for each role.
+          // DATA FLOW: PARENT -> CHILD. Pass this job (`item`) and its position (`index`) down to TimelineCard.
           <TimelineCard key={`${item.company}-${item.year}`} item={item} index={index} />
         ))}
       </div>
