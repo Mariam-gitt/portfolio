@@ -47,7 +47,7 @@ export const experience = [
   {
     year: "2026",
     role: "Software Engineering Intern",
-    company: "[Current Company]",
+    company: "Fantech Labs",
     bullets: [
       "Built and reviewed web development projects including a Movie Explorer application using Next.js and TypeScript and a forms project using React Hook Form, Zod, Prisma, and PostgreSQL.",
       "Developed an API to create HubSpot workflows through Claude Code when the available HubSpot MCP functionality did not support workflow creation.",
@@ -156,4 +156,10 @@ export const education = {
   institution: "University of Okara, Renala Khurd",
   period: "2022–2026",
   cgpa: "3.7/4.0",
+  college: {
+    name: "Punjab Group of Colleges",
+    marks: "984/1100",
+    campus: "The Education Campus",
+    campusMarks: "1007/1100",
+  },
 };
