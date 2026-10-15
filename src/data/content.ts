@@ -153,7 +153,7 @@ export const education = {
   degree: "BS Computer Science",
   institution: "University of Okara, Renala Khurd",
   period: "2022–2026",
-  cgpa: "3.7/4.0",
+  cgpa: "3.73/4.0",
   college: {
     name: "Punjab Group of Colleges",
     marks: "984/1100",
