@@ -48,6 +48,8 @@ export const experience = [
     year: "2026",
     role: "Software Engineering Intern",
     company: "Fantech Labs",
+    // Link to company LinkedIn posts (added per request).
+    link: "https://www.linkedin.com/company/fantech-labs/posts/",
     bullets: [
       "Built and reviewed web development projects including a Movie Explorer application using Next.js and TypeScript and a forms project using React Hook Form, Zod, Prisma, and PostgreSQL.",
       "Developed an API to create HubSpot workflows through Claude Code when the available HubSpot MCP functionality did not support workflow creation.",
@@ -59,6 +61,8 @@ export const experience = [
     year: "2026",
     role: "Hybrid Intern",
     company: "Punjab Information Technology Board (PITB), Lahore",
+    // Link to PITB LinkedIn feed (added per request).
+    link: "https://www.linkedin.com/company/punjabitboard/posts/?feedView=all",
     bullets: [
       "Developed backend APIs using Express.js for CRUD operations, routing, file uploads, and JWT-based authentication.",
       "Tested REST APIs using Postman and integrated relational data using MySQL.",
@@ -96,6 +100,8 @@ export const projects: Project[] = [
     // The file in /public/projects is named wordknit.jpg.png.
     image: "/projects/wordknit.jpg.png",
     github: "https://github.com/Mariam-gitt/WordKnit",
+    // Add live URL here if you have a deployed link; currently left undefined until you provide it.
+    // live: "https://wordknit.example.com",
     features: [
       "AI-powered contextual word explanations",
       "Vocabulary coaching",
@@ -115,6 +121,7 @@ export const projects: Project[] = [
     // The file in /public/projects includes the .png extension twice.
     image: "/projects/movie-explorer.png.png",
     github: "https://github.com/Mariam-gitt/movieExplorer",
+    // live: "https://movie-explorer.example.com",
     features: [
       "Infinite scrolling through movie lists",
       "Trending, popular, top-rated, upcoming & now-playing sections",
@@ -131,6 +138,7 @@ export const projects: Project[] = [
     kind: "Project",
     image: "/projects/rag-chatbot.png",
     github: "https://github.com/Mariam-gitt/rag-chatbot",
+    // live: "https://rag-chatbot.example.com",
     features: [
       "Upload documents and ask questions about them",
       "Vector-search retrieval over document chunks",
