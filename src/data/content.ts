@@ -28,8 +28,8 @@ export const profile = {
   role: "Software Engineer",
   // Store the secondary role wording from the supplied résumé.
   secondaryRole: "Full-Stack Developer",
-  // Store the user's location from the supplied résumé.
-  location: "Renala Khurd, Punjab, Pakistan",
+  // Store the user's location from the supplied résumé. (left blank intentionally)
+  location: "",
   // Store the user's public email from the supplied résumé.
   email: "mariamakbar77@gmail.com",
   // Store the public GitHub profile from the supplied résumé/repository.
@@ -159,7 +159,9 @@ export const education = {
   college: {
     name: "Punjab Group of Colleges",
     marks: "984/1100",
-    campus: "The Education Campus",
-    campusMarks: "1007/1100",
+  },
+  school: {
+    name: "The Education Campus",
+    marks: "1007/1100",
   },
 };
