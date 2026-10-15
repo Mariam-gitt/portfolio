@@ -100,19 +100,19 @@ export default function Contact() {
           </div>
         </div>
         {/* Render the actual contact form. */}
-        <form onSubmit={handleSubmit} className="relative overflow-hidden rounded-[2rem] border-2 border-ink bg-paper p-6 shadow-[8px_8px_0_var(--color-blush)] md:p-8">
+        <form onSubmit={handleSubmit} className="relative overflow-hidden rounded-[1.5rem] border-2 border-ink bg-paper p-5 shadow-[6px_6px_0_var(--color-blush)] md:p-6 md:max-w-md">
           {/* Render the name field. */}
-          <label className="block font-mono-display text-xs uppercase tracking-wider">Name<input required name="name" autoComplete="name" maxLength={100} value={form.name} onChange={(event) => updateField("name", event.target.value)} className="mt-2 w-full rounded-md border border-line bg-white/0 px-3 py-3 text-sm outline-none focus:border-plum" /></label>
+          <label className="block font-mono-display text-xs uppercase tracking-wider">Name<input required name="name" autoComplete="name" maxLength={100} value={form.name} onChange={(event) => updateField("name", event.target.value)} className="mt-2 w-full rounded-md border border-line bg-white/0 px-3 py-2 text-sm outline-none focus:border-plum" /></label>
           {/* Render the email field. */}
-          <label className="mt-5 block font-mono-display text-xs uppercase tracking-wider">Email<input required name="email" type="email" autoComplete="email" maxLength={200} value={form.email} onChange={(event) => updateField("email", event.target.value)} className="mt-2 w-full rounded-md border border-line bg-white/0 px-3 py-3 text-sm outline-none focus:border-plum" /></label>
+          <label className="mt-5 block font-mono-display text-xs uppercase tracking-wider">Email<input required name="email" type="email" autoComplete="email" maxLength={200} value={form.email} onChange={(event) => updateField("email", event.target.value)} className="mt-2 w-full rounded-md border border-line bg-white/0 px-3 py-2 text-sm outline-none focus:border-plum" /></label>
           {/* Render the message field (reduced size). */}
-          <label className="mt-5 block font-mono-display text-xs uppercase tracking-wider">Message<textarea required name="message" maxLength={5000} rows={4} value={form.message} onChange={(event) => updateField("message", event.target.value)} className="mt-2 w-full rounded-md border border-line bg-white/0 px-3 py-3 text-sm outline-none focus:border-plum" /></label>
+          <label className="mt-5 block font-mono-display text-xs uppercase tracking-wider">Message<textarea required name="message" maxLength={5000} rows={3} value={form.message} onChange={(event) => updateField("message", event.target.value)} className="mt-2 w-full rounded-md border border-line bg-white/0 px-3 py-2 text-sm outline-none focus:border-plum" /></label>
           {/* Hidden spam trap: real people never see or fill this, bots usually do. */}
           <div className="absolute -left-[9999px] h-0 w-0 overflow-hidden" aria-hidden="true">
             <label>Website<input name="website" type="text" tabIndex={-1} autoComplete="off" defaultValue="" /></label>
           </div>
           {/* Render the submit button. */}
-          <button type="submit" disabled={status === "sending"} className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full border-2 border-ink bg-mustard px-5 py-3 font-mono-display text-sm font-bold uppercase tracking-wider hover:bg-mustard/90">
+          <button type="submit" disabled={status === "sending"} className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full border-2 border-ink bg-mustard px-4 py-2 font-mono-display text-sm font-bold uppercase tracking-wider hover:bg-mustard/90">
             {/* Show the send icon. */}
             <Send size={16} />
             {/* Change the label while the request is in progress. */}
