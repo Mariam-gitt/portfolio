@@ -89,23 +89,6 @@ export const skills = {
 // Store the selected portfolio projects using only information present in the résumé.
 export const projects: Project[] = [
   {
-    name: "Movie Explorer",
-    description: "A movie discovery application with trending, popular, top-rated, upcoming, and now-playing sections, dynamic movie pages, search, favorites, and recently viewed movies.",
-    tags: ["Next.js", "TypeScript", "TMDB API", "Tailwind CSS", "shadcn/ui"],
-    kind: "Internship Project",
-    // The file in /public/projects includes the .png extension twice.
-    image: "/projects/movie-explorer.png.png",
-    github: "https://github.com/Mariam-gitt/movieExplorer",
-    features: [
-      "Infinite scrolling through movie lists",
-      "Trending, popular, top-rated, upcoming & now-playing sections",
-      "Dynamic movie detail pages",
-      "Search for any movie",
-      "Favorites list",
-      "Recently viewed movies",
-    ],
-  },
-  {
     name: "WordKnit",
     description: "A full-stack vocabulary and reading companion with AI-powered contextual word explanations, speaking and vocabulary coaching, RAG retrieval, and document/PDF processing.",
     tags: ["React", "Node.js", "Express.js", "MongoDB", "Python", "RAG", "LLM APIs"],
@@ -124,30 +107,38 @@ export const projects: Project[] = [
       text: "An AI speaking coach that helps you practice speaking and build your vocabulary, alongside the reading companion.",
     },
   },
-  // {
-  //   name: "RAG-Based Document Chatbot",
-  //   description: "A chatbot that answers questions about your uploaded documents and shows the sources each answer came from.",
-  //   tags: ["Next.js", "Node.js", "PostgreSQL", "Vector Search", "LLM", "RAG"],
-  //   kind: "Project",
-  //   github: "https://github.com/Mariam-gitt/portfolio",
-  //   features: [
-  //     "Upload documents and ask questions about them",
-  //     "Finds the most relevant parts of your documents",
-  //     "Shows the sources behind every answer",
-  //   ],
-  // },
-  // {
-  //   name: "E-Commerce Application",
-  //   description: "A React.js and JavaScript e-commerce application built to strengthen understanding of React components, state management, and React hooks.",
-  //   tags: ["React.js", "JavaScript"],
-  //   kind: "Personal Project",
-  //   github: "https://github.com/Mariam-gitt/ecom",
-  //   features: [
-  //     "Component-based React UI",
-  //     "State management",
-  //     "React hooks",
-  //   ],
-  // },
+  {
+    name: "Movie Explorer",
+    description: "A movie discovery application with trending, popular, top-rated, upcoming, and now-playing sections, dynamic movie pages, search, favorites, and recently viewed movies.",
+    tags: ["Next.js", "TypeScript", "TMDB API", "Tailwind CSS", "shadcn/ui"],
+    kind: "Internship Project",
+    // The file in /public/projects includes the .png extension twice.
+    image: "/projects/movie-explorer.png.png",
+    github: "https://github.com/Mariam-gitt/movieExplorer",
+    features: [
+      "Infinite scrolling through movie lists",
+      "Trending, popular, top-rated, upcoming & now-playing sections",
+      "Dynamic movie detail pages",
+      "Search for any movie",
+      "Favorites list",
+      "Recently viewed movies",
+    ],
+  },
+  {
+    name: "RAG-Based Document Chatbot",
+    description: "A retrieval-augmented generation chatbot that answers questions about uploaded documents and surfaces the source passages for each answer.",
+    tags: ["Next.js", "Node.js", "PostgreSQL", "Vector Search", "LLM", "RAG"],
+    kind: "Project",
+    image: "/projects/rag-chatbot.png",
+    github: "https://github.com/Mariam-gitt/rag-chatbot",
+    features: [
+      "Upload documents and ask questions about them",
+      "Vector-search retrieval over document chunks",
+      "Shows source citations for every answer",
+      "Streaming answers from an LLM with context",
+    ],
+  },
+  // Additional projects can be added here following the same shape.
 ];
 
 // Store the education information from the supplied résumé.

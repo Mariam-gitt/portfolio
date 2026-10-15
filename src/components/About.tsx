@@ -36,13 +36,13 @@ export default function About() {
           {/* College and School shown as separate cards underneath. */}
           <div className="grid gap-6 sm:grid-cols-2">
             <div className="rounded-3xl border-2 border-ink bg-paper p-6 shadow-[6px_6px_0_var(--color-blush)]">
-              <p className="font-mono-display text-[10px] uppercase tracking-[0.2em] text-plum">college</p>
+              <p className="font-mono-display text-[10px] uppercase tracking-[0.2em] text-plum">FSC</p>
               <p className="mt-3 text-lg font-semibold">{education.college?.name}</p>
               {education.college?.marks && <p className="mt-1 text-sm text-muted">Marks: {education.college.marks}</p>}
             </div>
 
             <div className="rounded-3xl border-2 border-ink bg-paper p-6 shadow-[6px_6px_0_var(--color-blush)]">
-              <p className="font-mono-display text-[10px] uppercase tracking-[0.2em] text-plum">school</p>
+              <p className="font-mono-display text-[10px] uppercase tracking-[0.2em] text-plum">Matric</p>
               <p className="mt-3 text-lg font-semibold">{education.school?.name}</p>
               {education.school?.marks && <p className="mt-1 text-sm text-muted">Marks: {education.school.marks}</p>}
             </div>

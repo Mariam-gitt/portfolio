@@ -160,3 +160,13 @@ body {
     scroll-behavior: auto !important;
   }
 }
+
+/* Utility class to hide native scrollbars on the project carousel while keeping scrolling functional. */
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* WebKit browsers */
+}
