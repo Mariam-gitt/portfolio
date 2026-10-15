@@ -17,7 +17,7 @@ function Thumbnail({ project }: { project: Project }) {
   // Decide whether a real screenshot can be shown.
   const showImage = Boolean(project.image) && !failed;
   return (
-    <div className="relative h-32 w-full shrink-0 bg-sand">
+    <div className="relative h-40 w-full shrink-0 bg-sand md:h-60">
       {/* Show a small badge naming the kind of project. */}
       <span className="absolute right-2 top-2 z-10 rounded-full border-2 border-ink bg-mustard px-2.5 py-0.5 font-mono-display text-[9px] font-bold uppercase tracking-wider text-ink">{project.kind}</span>
       {showImage ? (
@@ -42,7 +42,7 @@ function Thumbnail({ project }: { project: Project }) {
 // Render one fixed-size project card.
 function ProjectCard({ project, onOpen }: { project: Project; onOpen: () => void }) {
   return (
-    <article className="flex h-[300px] w-[230px] shrink-0 snap-start flex-col overflow-hidden rounded-2xl border-2 border-ink bg-paper shadow-[5px_5px_0_var(--color-ink)]">
+    <article className="flex h-[360px] w-[300px] md:w-[640px] md:h-[420px] shrink-0 snap-center flex-col overflow-hidden rounded-2xl border-2 border-ink bg-paper shadow-[5px_5px_0_var(--color-ink)]">
       {/* Show the fixed-height screenshot area with its badge. */}
       <Thumbnail project={project} />
       {/* Keep the text area flexible so the button always lands at the bottom. */}
@@ -154,8 +154,13 @@ export default function Projects() {
   // Track which project's details modal is open, if any.
   const [openProject, setOpenProject] = useState<Project | null>(null);
 
-  // Scroll the track by roughly one card width in either direction.
-  const scrollBy = (direction: 1 | -1) => trackRef.current?.scrollBy({ left: direction * 250, behavior: "smooth" });
+  // Scroll the track by one visible ‘page’ so one card is centered at a time.
+  const scrollBy = (direction: 1 | -1) => {
+    const track = trackRef.current;
+    if (!track) return;
+    const width = track.clientWidth;
+    track.scrollBy({ left: direction * width, behavior: "smooth" });
+  };
 
   return (
     <section id="projects" className="mx-auto max-w-6xl px-6 py-24">
@@ -174,7 +179,7 @@ export default function Projects() {
         </div>
       </div>
       {/* Render the horizontally scrolling, snap-aligned, scrollbar-free carousel. */}
-      <div ref={trackRef} className="no-scrollbar flex gap-5 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-2">
+      <div ref={trackRef} className="no-scrollbar flex gap-5 overflow-x-auto scroll-smooth snap-x snap-mandatory snap-center pb-2 items-center">
         {projects.map((project) => (
           <ProjectCard key={project.name} project={project} onOpen={() => setOpenProject(project)} />
         ))}
