@@ -50,6 +50,8 @@ export const experience = [
     company: "Fantech Labs",
     // Link to company LinkedIn posts.
     link: "https://www.linkedin.com/company/fantech-labs/posts/",
+    // Representative image for Fantech Labs (you uploaded two; using the desk photo here).
+    image: "/experience/fantech-desk.jpg",
     bullets: [
       "Built and reviewed web development projects including a Movie Explorer application using Next.js and TypeScript and a forms project using React Hook Form, Zod, Prisma, and PostgreSQL.",
       "Developed an API to create HubSpot workflows through Claude Code when the available HubSpot MCP functionality did not support workflow creation.",
@@ -63,6 +65,8 @@ export const experience = [
     company: "Punjab Information Technology Board (PITB), Lahore",
     // Link to PITB LinkedIn feed.
     link: "https://www.linkedin.com/company/punjabitboard/posts/?feedView=all",
+    // Image for PITB (software technology park photo you provided).
+    image: "/experience/pitb-building.jpg",
     bullets: [
       "Developed backend APIs using Express.js for CRUD operations, routing, file uploads, and JWT-based authentication.",
       "Tested REST APIs using Postman and integrated relational data using MySQL.",

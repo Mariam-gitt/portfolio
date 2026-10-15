@@ -31,14 +31,30 @@ function TimelineCard({ item, index }: { item: (typeof experience)[number]; inde
 
   // Render one alternating timeline item.
   return (
-    <div ref={ref} className={`relative grid gap-5 md:grid-cols-2 ${index % 2 === 0 ? "timeline-left" : "timeline-right"} ${visible ? "reveal-visible" : "reveal-hidden"}`}>
-      {/* Render the timeline year on the opposite side of the card on desktop. */}
-      <div className={`${index % 2 === 0 ? "md:text-right" : "md:order-2 md:text-left"} flex items-start md:justify-end`}>
-        {/* Show the experience year in Space Mono. */}
-        <span className="font-mono-display text-sm font-bold text-plum">{item.year}</span>
+    <div
+      ref={ref}
+      className={`relative grid gap-5 md:grid-cols-3 items-center ${index % 2 === 0 ? "timeline-left" : "timeline-right"} ${
+        visible ? "reveal-visible" : "reveal-hidden"
+      }`}
+    >
+      {/* Left column: year or image depending on index. */}
+      <div className={`flex items-start md:justify-end md:order-1`}>
+        {index % 2 === 0 ? (
+          <span className="hidden md:block font-mono-display text-sm font-bold text-plum">{item.year}</span>
+        ) : (
+          // Show image on the left for odd items on md+ (opposite side of card).
+          item.image ? (
+            <img src={item.image} alt={`${item.company} photo`} className="hidden md:block max-w-[220px] rounded-xl object-cover" />
+          ) : (
+            <span className="hidden md:block font-mono-display text-sm font-bold text-plum">{item.year}</span>
+          )
+        )}
       </div>
-      {/* Render the experience detail card. */}
-      <article className={`${index % 2 === 0 ? "md:order-2" : "md:order-1"} rounded-3xl border-2 border-ink bg-paper p-6 shadow-[6px_6px_0_var(--color-blush)]`}>
+
+      {/* Middle column: the card content. */}
+      <article
+        className={`${index % 2 === 0 ? "md:order-2" : "md:order-2"} rounded-3xl border-2 border-ink bg-paper p-6 shadow-[6px_6px_0_var(--color-blush)]`}
+      >
         {/* Show the role. */}
         <h3 className="font-mono-display text-xl font-bold">{item.role}</h3>
         {/* Show the company. */}
@@ -56,8 +72,26 @@ function TimelineCard({ item, index }: { item: (typeof experience)[number]; inde
           ))}
         </ul>
       </article>
+
+      {/* Right column: image or year depending on index. */}
+      <div className="flex items-start md:justify-start md:order-3">
+        {index % 2 === 0 ? (
+          // For even items show image on the right (opposite side of the card).
+          item.image ? (
+            <img src={item.image} alt={`${item.company} photo`} className="hidden md:block max-w-[220px] rounded-xl object-cover" />
+          ) : (
+            <span className="hidden md:block font-mono-display text-sm font-bold text-plum">{item.year}</span>
+          )
+        ) : (
+          <span className="hidden md:block font-mono-display text-sm font-bold text-plum">{item.year}</span>
+        )}
+      </div>
+
       {/* Draw the central timeline node on larger screens. */}
-      <span className="absolute left-1/2 top-1/2 hidden h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-ink bg-mustard md:block" aria-hidden="true" />
+      <span
+        className="absolute left-1/2 top-1/2 hidden h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-ink bg-mustard md:block"
+        aria-hidden="true"
+      />
     </div>
   );
 }
